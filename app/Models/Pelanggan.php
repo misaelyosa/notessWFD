@@ -25,6 +25,6 @@ class Pelanggan extends Model
 
     public function pembelian()
     {
-        return $this->hasMany(Pembelian::class, 'pembelian_id', 'id');
+        return $this->hasMany(Pembelian::class, 'pelanggan_id', 'id');
     }
 }

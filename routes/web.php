@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HaloController;
+use App\Models\pelanggan;
+use App\Models\pembelian;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,20 +20,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/halo/index/{param1}/{param2}/{param3?}', [HaloController::class, 'index'])->name('halo.index');
+
+Route::get('/pelanggan', function(){
+    return view('pelanggan', ['pelanggan'=>Pelanggan::with(['pembelian'])->get(), 'pembelian'=>Pembelian::with(['pelanggan'])->get()]);
+});
+
+Route::get('/pembelian', function(){
+    return view('pelanggan', ['pelanggan'=>Pelanggan::with(['pembelian'])->get()]);
+});
+
 // Route::get('/helo', function(){
-//     return view('halo');
+//     return 'Hello World!';
 // });
 
-// Route::get('/halo', function(){
-//     return view('halo2');
-// });
+// Route::get('/heloo', function(){return view('profil');});
 
-Route::get('/profil/', function(){
-    return view('profil');
-})->name('profil');
-
-Route::get('/halo/index/{param1}/{param2?}', 
-    [HaloController::class, 'index']);
-
-    Route::post('/halo/index/', 
-    [HaloController::class, 'index']);
+// Route::get('/eric/{var1?}', function(){
+//     return view('blade');
+// })->name('erico');
